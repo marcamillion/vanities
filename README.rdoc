@@ -1,4 +1,4 @@
-= vanities
+= Vanities
 
 Vanities is a gem for use with a Rails 3 project that will transform
 URLs like this:
@@ -16,12 +16,15 @@ license plate, it's a unique name or ID chosen by the user that is specific to t
 However, this doesn't necessarily have to be for a user - in theory, any model in your
 Rails 3 application can use a vanity URL.
 
+This gem works by redirecting requests for a vanity name - say "foo" - to the object
+that owns it.  So for example, visiting example.com/foo would perform a redirect to
+example.com/users/1 (assuming a user object with an ID of 1 owned the "foo" vanity).
+
 == Common Use Cases
 
 Some common use cases for something like vanities would be:
- * user profiles (www.example.com/users/22829 => www.example.com/leeroy)
- * specific products in an e-commerce system
-   (www.exampleshop.com/products/19920 => www.exampleshop.com/buythis)
+* user profiles (www.example.com/users/22829 => www.example.com/leeroy)
+* specific products in an e-commerce system (www.exampleshop.com/products/19920 => www.exampleshop.com/buythis)
 
 == How To Install
 
@@ -29,14 +32,14 @@ Vanities is pretty simple to install.  First, a few requirements and caveats:
 
 === Requirements
 
-*REST-based models* - every model with which you want to use vanities MUST be made
+<b>REST-based models</b> - every model with which you want to use vanities MUST be made
 a RESTful resource in your routes file (config/routes.rb).  This is absolutely required.
 
-*Rails 3* - vanities is built on Rails 3.  It might work with older versions of Rails, but
+<b>Rails 3</b> - vanities is built on Rails 3.  It might work with older versions of Rails, but
 only if you go back and reverse engineer some of the routing stuff, and possibly other things
 if using versions of Rails prior to the 2.3.x series.
 
-*ActiveRecord* - vanities needs a table in the database to keep track of the individual
+<b>ActiveRecord</b> - vanities needs a table in the database to keep track of the individual
 vanity names.  Datamapper and/or -otherorm- isn't/aren't supported out of the box, but the
 setup itself is so simple that you could probably reverse-engineer this to use another ORM
 if you wanted to.
