@@ -11,7 +11,7 @@ Into something cool, like this:
 
 == The Vanity URL Explained
 
-Vanities "introduces" the concept of the "vanity URL".  Similar to a vanity
+Vanities implements the concept of the "vanity URL".  Similar to a vanity
 license plate, it's a unique name or ID chosen by the user that is specific to them.
 However, this doesn't necessarily have to be for a user - in theory, any model in your
 Rails 3 application can use a vanity URL.
@@ -43,6 +43,10 @@ if using versions of Rails prior to the 2.3.x series.
 vanity names.  Datamapper and/or -otherorm- isn't/aren't supported out of the box, but the
 setup itself is so simple that you could probably reverse-engineer this to use another ORM
 if you wanted to.
+
+<b>Letters-Only for Vanity URLs</b> - Vanity URLs can contain letters only - no numbers.  If you
+don't like this functionality, you can manually remove the regular expression call in the
+route for the vanities controller.
 
 === Installation
 
