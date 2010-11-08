@@ -1,1 +1,85 @@
-TODO
+= vanities
+
+Vanities is a gem for use with a Rails 3 project that will transform
+URLs like this:
+
+  http://example.com/users/1
+
+Into something cool, like this:
+
+  http://example.com/foo
+
+== The Vanity URL Explained
+
+Vanities "introduces" the concept of the "vanity URL".  Similar to a vanity
+license plate, it's a unique name or ID chosen by the user that is specific to them.
+However, this doesn't necessarily have to be for a user - in theory, any model in your
+Rails 3 application can use a vanity URL.
+
+== Common Use Cases
+
+Some common use cases for something like vanities would be:
+ * user profiles (www.example.com/users/22829 => www.example.com/leeroy)
+ * specific products in an e-commerce system
+   (www.exampleshop.com/products/19920 => www.exampleshop.com/buythis)
+
+== How To Install
+
+Vanities is pretty simple to install.  First, a few requirements and caveats:
+
+=== Requirements
+
+*REST-based models* - every model with which you want to use vanities MUST be made
+a RESTful resource in your routes file (config/routes.rb).  This is absolutely required.
+
+*Rails 3* - vanities is built on Rails 3.  It might work with older versions of Rails, but
+only if you go back and reverse engineer some of the routing stuff, and possibly other things
+if using versions of Rails prior to the 2.3.x series.
+
+*ActiveRecord* - vanities needs a table in the database to keep track of the individual
+vanity names.  Datamapper and/or -otherorm- isn't/aren't supported out of the box, but the
+setup itself is so simple that you could probably reverse-engineer this to use another ORM
+if you wanted to.
+
+=== Installation
+
+In your application's Gemfile, add the following line:
+
+  gem 'vanities'
+
+Then in your console/terminal, do:
+
+  bundle install
+
+Next, while still in your terminal/console:
+
+  rails g vanities
+
+You'll see a list of instructions that it'll print out.  Next you'll want to
+open up your model that you want to have a vanity URL (say a User model) and add this
+line to it to substitute the polymorphic association that does all the magic:
+
+  has_vanity
+
+Finally, do:
+
+  rake db:migrate
+
+And you're all set!
+
+== Using vanities
+
+Every model that has a call to 'has_vanity' will have a vanity object associated with it.
+Each instance of your model will have one - and only one - vanity.  Vanities CANNOT be repeated
+across different models.  For example, let's say you have a user with a vanity called "leeroy", and
+a product; you cannot call the product's vanity "leeroy" as well, as that's already taken by
+the aforementioned user.
+
+To set up a vanity for a model, all you need to do is create a vanity.  Say you're in the Rails
+console.  This would be as simple as:
+
+  u = User.first
+  u.vanity = Vanity.new(:name => "leeroy")
+
+Finally, you can go to http://localhost:3000/leeroy to be automatically redirected
+to the user's 'show' action.
