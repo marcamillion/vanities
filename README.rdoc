@@ -74,6 +74,17 @@ Finally, do:
 
 And you're all set!
 
+=== A word about routes...
+
+Vanities should be set as the absolute last route in your routes.rb file.  The reason
+is because Rails' routing system is set up to take the first route in the file (from the top)
+that matches, and stop there.  If a vanity URL that doesn't exist is higher in routing
+priority than, say, a user's show action, things are going to be a little funky.
+
+All you need to do is cut and paste the route installed for the vanities controller
+from wherever it is in your routes.rb file after installation, and move it to be the
+last route in your system.
+
 == Using vanities
 
 Every model that has a call to 'has_vanity' will have a vanity object associated with it.
@@ -90,3 +101,9 @@ console.  This would be as simple as:
 
 Finally, you can go to http://localhost:3000/leeroy to be automatically redirected
 to the user's 'show' action.
+
+== Changelog
+
+20 March 2011: Slight refactor to make the vanities controller render a 404 if it can't
+find a vanity object.  Small documentation update about routes (make sure vanities is
+the LAST route in your routes.rb file).
