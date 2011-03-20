@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('vanities', '0.1.1') do |x|
+Echoe.new('vanities', '0.1.2') do |x|
   x.description               = "Give each of your models a simple 'vanity' URL.  
                                 Makes example.com/users/1 into something like example.com/foobar"
   x.url                       = "https://github.com/jaustinhughey/vanities"
