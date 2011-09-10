@@ -23,7 +23,7 @@ class VanitiesGenerator < Rails::Generators::Base
   def inject_new_route
     route "
   controller :vanities do 
-    match ':vname' => :show, :via => :get, :constraints => {:vname => /[A-Za-z]+/}
+    match ':vname' => :show, :via => :get, :constraints => {:vname => /[A-Za-z0-9\-\+]+/}
   end"
   end
 
